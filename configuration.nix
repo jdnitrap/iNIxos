@@ -48,7 +48,7 @@
 
   # Enable the KDE Plasma Desktop Environment.
   services.displayManager.lightdm.enable = true;
-  services.desktopManager.cinnamon.enable = true;
+  services.desktopManager.xfce.enable = true;
 
   # Configure keymap in X11
   services.xserver = {
@@ -88,7 +88,16 @@
     description = "Bob";
     extraGroups = [ "networkmanager" "wheel" "scanner" "lp" ];
     packages = with pkgs; [
-      
+
+	firefox
+	thunderbird
+	syncthing
+	filezilla
+	screen
+	tmux
+	libreoffice
+	homebank
+	gnome.gnome-disk-utility
     
     ];  
   
