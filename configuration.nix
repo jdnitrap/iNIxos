@@ -14,7 +14,7 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  networking.hostName = "nixos"; # Define your hostname.
+  networking.hostName = "inixos"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
   # Configure network proxy if necessary
@@ -43,40 +43,13 @@
   };
 
   # Enable the X11 windowing system.
+  # You can disable this if you're only using the Wayland session.
   services.xserver.enable = true;
 
   # Enable the KDE Plasma Desktop Environment.
-  #services.xserver.displayManager.lightdm.enable = false;
-  services.xserver.displayManager.gdm.enable = true;
-  #services.xserver.displayManager.sddm.enable = false;
-  
-  
-  services.xserver.desktopManager.xfce.enable = false;
-  services.xserver.desktopManager.lxqt.enable = false;
-  services.xserver.desktopManager.mate.enable = false;
-  services.xserver.desktopManager.plasma5.enable = false;
-  services.xserver.desktopManager.gnome.enable = true;
-  services.xserver.desktopManager.enlightenment.enable = false;
-  services.xserver.desktopManager.pantheon.enable = false;
-  services.xserver.desktopManager.lumina.enable = false;
-  services.xserver.desktopManager.kodi.enable = false;
-  services.xserver.desktopManager.deepin.enable = false;
-  services.xserver.desktopManager.cinnamon.enable = false;
-  services.xserver.desktopManager.cde.enable = false;
-  services.xserver.desktopManager.budgie.enable = false;
-  
-  
-  
-  
-  #services.gnome.gnome-initial-setup.enable = false;
-  
-  
-  
-  
-  
-  
-  
-  
+  services.displayManager.lightdm.enable = true;
+  services.desktopManager.cinnamon.enable = true;
+
   # Configure keymap in X11
   services.xserver = {
     layout = "us";
@@ -88,13 +61,8 @@
   services.printing.browsing = true;
   programs.system-config-printer.enable = true;
   services.system-config-printer.enable = true;
-  
-  
-  
-  
 
   # Enable sound with pipewire.
-  sound.enable = true;
   hardware.pulseaudio.enable = false;
   security.rtkit.enable = true;
   services.pipewire = {
@@ -114,22 +82,20 @@
   # services.xserver.libinput.enable = true;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
+    
   users.users.bob = {
     isNormalUser = true;
-    description = "bob";
-    extraGroups = [ "networkmanager" "wheel" ];
+    description = "Bob";
+    extraGroups = [ "networkmanager" "wheel" "scanner" "lp" ];
     packages = with pkgs; [
       
-      
-      
- 
     
-    ];
+    ];  
+  
   };
 
-  # Enable automatic login for the user.
-  services.xserver.displayManager.autoLogin.enable = false;
-  #services.xserver.displayManager.autoLogin.user = "bob";
+  # Install firefox.
+  programs.firefox.enable = false;
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
@@ -138,11 +104,9 @@
   # $ nix search wget
   environment.systemPackages = with pkgs; [
   
-  flatpak
-  #libsForQt5.discover
-  gnome.gnome-tweaks
-  gnomeExtensions.appindicator
-
+  
+  
+  
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
@@ -170,49 +134,49 @@
   # this value at the release version of the first install of this system.
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
-  system.stateVersion = "23.11"; # Did you read the comment?
+  system.stateVersion = "24.05"; # Did you read the comment?
   
-    #Flatpak
-	services.flatpak.enable = true;
-	xdg.portal = {
-	enable = true;
-	wlr.enable = true;
-	};
+  
+ 
 	
-	# Doc scanner
-
   hardware.sane.enable = true; # enables support for SANE scanners
   services.ipp-usb.enable = true;
   services.avahi.enable = true;
   services.avahi.nssmdns = true;
   
-  #################JELLYFIN###################
- services.jellyfin.enable = false;
- services.jellyfin.openFirewall = false;
 
-
-programs.gnome-terminal.enable = true;
-services.gnome.games.enable = false;
-services.gnome.gnome-keyring.enable = false;
-services.udev.packages = with pkgs; [ gnome.gnome-settings-daemon ];
-
-
-
-################Ollama########################
-# Ollama
-services.ollama = {
-  #package = pkgs.unstable.ollama; # Uncomment if you want to use the unstable channel, see https://fictionbecomesfact.com/nixos-unstable-channel
-  enable = true;
-  acceleration = "cuda"; # Or "rocm"
-  #environmentVariables = { # I haven't been able to get this to work myself yet, but I'm sharing it for the sake of completeness
-    # HOME = "/home/ollama";
-    # OLLAMA_MODELS = "/home/ollama/models";
-    # OLLAMA_HOST = "0.0.0.0:11434"; # Make Ollama accesible outside of localhost
-    # OLLAMA_ORIGINS = "http://localhost:8080,http://192.168.0.10:*"; # Allow access, otherwise Ollama returns 403 forbidden due to CORS
-  #};
+  
+  hardware.bluetooth.enable = true; # enables support for Bluetooth
+  hardware.bluetooth.powerOnBoot = true; # powers up the default Bluetooth controller on boot
+  
+  #services.accounts-daemon.enable = true;
+  
+  services = {
+    syncthing = {
+        enable = true;
+        user = "bob";
+        dataDir = "/home/bob/Documents";    # Default folder for new synced folders
+        configDir = "/home/bob/Documents/.config/syncthing";   # Folder for Syncthing's settings and keys
+        overrideDevices = true;     # overrides any devices added or deleted through the WebUI
+        overrideFolders = true;     # overrides any folders added or deleted through the WebUI
+        settings = {
+        devices = {
+        "lenovonixos" = { id = "5MPGNAG-BVAYITL-5YR4Q2Q-4TXTV73-YD6PK66-NYUYJ3B-WRFTD7T-VUKKUQQ"; };
+       
+                  };
+      
+         folders = {
+        
+        
+        "Documents" = {         # Name of folder in Syncthing, also the folder ID
+          path = "/home/bob/Documents";    # Which folder to add to Syncthing
+          devices = [ "lenovonixos" ];      # Which devices to share the folder with
+          ingorePerms = true;
+                      };
+        
+                   };
+    };
+  };
 };
-
-
-
 
 }
