@@ -9,15 +9,10 @@
     [ # Include the results of the hardware scan.
 
 
-      ./hardware-configuration.nix
-      #./print.nix
-      ./sound.nix
-      #./mom.nix
-      #./plasma.nix
-      #./opse.nix
-      #./samba.nix
-     ./pkgs.nix
-     ./syncthing.nix
+    ./hardware-configuration.nix
+    ./sound.nix
+	./pkgs.nix
+     
 
 
     ];
@@ -26,7 +21,7 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  networking.hostName = "iNixos"; # Define your hostname.
+  networking.hostName = "hostnamehere"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
   # Configure network proxy if necessary
@@ -57,12 +52,19 @@
 
 
 
-
+################################
+#Decktop and Display Enviroment#
+################################
   services.xserver = {
   enable = true;
-  displayManager.gdm.enable = true;
-  desktopManager.gnome.enable = true;
-};
+  displayManager.lightdm.enable = true;
+  desktopManager.cinnamon.enable = true;
+	};
+
+#######################################
+#End of Desktop and Display Enviroment#
+#######################################
+
 
 
   # Configure keymap in X11
@@ -77,6 +79,11 @@
 
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;
+
+######################
+#     Users          #
+######################
+
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.admin = {
@@ -98,7 +105,9 @@
   };
   
 
-
+#################################
+#        End of Users           #
+#################################
 
 
   # Some programs need SUID wrappers, can be configured further or are
@@ -130,25 +139,8 @@
   
 
   
-#OPENSNITCH
-  
- # services.opensnitch = {
-  #enable = true;
-  #};
-    
-  #systemd = {
-  #services = {
-   # opensnitch = {
-   #   description = "Opensnitch Application Firewall Daemon";
-    #  wants = ["network.target"];
-     # after = ["network.target"];
-     #wantedBy = ["multi-user.target"];
-     # path = [ pkgs.iptables ];
-      
-      #enable = true;
-    #};
-    #};
-    #};
+
+
 
 ###########################
 #Printer and Scanner Setup#
@@ -186,7 +178,9 @@ hardware.sane.enable = true; # enables support for SANE scanners
   services.ipp-usb.enable = true;
   services.avahi.nssmdns = true;
   
-
+###################################################
+#           End of Printer and Scanner Setup      #
+###################################################
 
 
 
