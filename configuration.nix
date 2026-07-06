@@ -114,7 +114,7 @@ imports =
 services.xserver = {
   enable = true;
   displayManager.lightdm.enable = true;
-  desktopManager.cinnamon.enable = true;
+  desktopManager.lxqt.enable = true;
 	};
 
 #######################################
@@ -188,15 +188,8 @@ services.xserver = {
 
 services.printing.drivers = with pkgs; [
 
-	epson-workforce-635-nx625-series
-	epson-201106w
-	epson-201401w
-	foomatic-db-ppds
+	
 	gutenprint
-	foomatic-db
-	cnijfilter_2_80
-	cnijfilter_4_00
-	epson_201207w
 	gutenprintBin
 	cups-printers
 	
