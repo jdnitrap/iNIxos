@@ -242,7 +242,6 @@ hardware.sane.enable = true; # enables support for SANE scanners
 	brave
 	firefox
 	libreoffice
-	github
 
 	];
 ########################
