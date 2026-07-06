@@ -129,7 +129,7 @@ services.xserver = {
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.admin = {
     isNormalUser = true;
-    description = "nimda";
+    description = "admin";
     extraGroups = [ "networkmanager" "wheel" "input" "audio" "lp" "scanner" "video"];
     packages = with pkgs; [
     #  thunderbird
