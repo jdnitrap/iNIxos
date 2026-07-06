@@ -71,11 +71,7 @@
     variant = "";
   };
 
-  # Enable CUPS to print documents.
-  #services.printing.enable = true;
-  #services.printing.browsing = true;
-  #programs.system-config-printer.enable = true;
-  #services.system-config-printer.enable = true;
+  
 
   
 
@@ -83,19 +79,19 @@
   # services.xserver.libinput.enable = true;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users.nimda = {
+  users.users.admin = {
     isNormalUser = true;
     description = "nimda";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [ "networkmanager" "wheel" "input" "audio" "lp" "scanner" "video"];
     packages = with pkgs; [
     #  thunderbird
     ];
   };
   
-  users.users.bob = {
+  users.users.user1 = {
     isNormalUser = true;
-    description = "bob";
-    extraGroups = [ "networkmanager" "wheel" "scanner" "lp"];
+    description = "user1";
+    extraGroups = [ "networkmanager" "scanner" "lp" "input" "audio" "video"];
     packages = with pkgs; [
 
     ];
@@ -116,7 +112,7 @@
   # List services that you want to enable:
 
   # Enable the OpenSSH daemon.
-   services.openssh.enable = true;
+   services.openssh.enable = false;
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
@@ -130,10 +126,9 @@
   # this value at the release version of the first install of this system.
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
-  system.stateVersion = "25.05"; # Did you read the comment?
+  system.stateVersion = "26.05"; # Did you read the comment?
   
-#FLATPAK 
-  services.flatpak.enable = true;
+
   
 #OPENSNITCH
   
@@ -155,43 +150,42 @@
     #};
     #};
 
+###########################
+#Printer and Scanner Setup#
+###########################
 
-  
+
+# Enable CUPS to print documents.
+  services.printing.enable = true;
+  services.printing.browsing = true;
+  programs.system-config-printer.enable = true;
+  services.system-config-printer.enable = true;
   services.avahi = {
   enable = true;
   nssmdns4 = true;
   openFirewall = true;
 };
 
-#services.printing.drivers = with pkgs; [
+services.printing.drivers = with pkgs; [
 
-#	epson-workforce-635-nx625-series
-#	epson-201106w
-#	epson-201401w
-#	foomatic-db-ppds
-#	gutenprint
-#	foomatic-db
-#	cnijfilter_2_80
-#	cnijfilter_4_00
-#	epson_201207w
-#	gutenprintBin
-#	cups-printers
+	epson-workforce-635-nx625-series
+	epson-201106w
+	epson-201401w
+	foomatic-db-ppds
+	gutenprint
+	foomatic-db
+	cnijfilter_2_80
+	cnijfilter_4_00
+	epson_201207w
+	gutenprintBin
+	cups-printers
 	
-#	];
+	];
 	
 hardware.sane.enable = true; # enables support for SANE scanners
   services.ipp-usb.enable = true;
   services.avahi.nssmdns = true;
   
-#Syncthing
-	#services.syncthing.enable = true;
-
-	services.netbird.enable = true;
-	services.tailscale.enable = true;
-
-
-
-     # programs.kdeconnect.enable = true;
 
 
 
