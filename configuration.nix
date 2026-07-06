@@ -197,7 +197,7 @@ services.printing.drivers = with pkgs; [
 	
 hardware.sane.enable = true; # enables support for SANE scanners
   services.ipp-usb.enable = true;
-  services.avahi.nssmdns4 = true;
+  services.avahi.nssmdns = true;
   
 ##################################
 #End of Printer and Scanner Setup#
