@@ -197,7 +197,7 @@ services.printing.drivers = with pkgs; [
 	
 hardware.sane.enable = true; # enables support for SANE scanners
   services.ipp-usb.enable = true;
-  services.avahi.nssmdns = true;
+  services.avahi.nssmdns4 = true;
   
 ##################################
 #End of Printer and Scanner Setup#
@@ -208,7 +208,7 @@ hardware.sane.enable = true; # enables support for SANE scanners
 #############
 
 # Enable sound with pipewire.
-  hardware.pulseaudio.enable = false;
+  services.pulseaudio.enable = false;
   security.rtkit.enable = true;
   services.pipewire = {
     enable = true;
