@@ -245,6 +245,7 @@ hardware.sane.enable = true; # enables support for SANE scanners
 	firefox
 	libreoffice
 thunderbird
+simple-scan
 
 	];
 ########################
